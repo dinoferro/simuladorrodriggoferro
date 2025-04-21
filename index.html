@@ -79,7 +79,7 @@
         </form>
         <div id="resultado" class="result hidden">
             <h3>Resultados del Crédito</h3>
-            <p><strong>Cuota Mensual:</strong> $<span id="cuotaMensual">0</span></p>
+            <p><strong>Cuota Mensual (con IVA):</strong> $<span id="cuotaMensual">0</span></p>
             <p><strong>Total a Pagar:</strong> $<span id="totalPagar">0</span></p>
             <p><strong>Intereses Totales:</strong> $<span id="interesesTotales">0</span></p>
             <p><strong>Gastos de Otorgamiento (con IVA):</strong> $<span id="gastosOtorgamiento">0</span></p>
@@ -107,12 +107,13 @@
             const gastosBase = (gastosPorcentaje / 100) * monto;
             const gastosConIVA = gastosBase * 1.21; // Sumar el 21% de IVA
 
-            let cuotaMensual, totalPagar, interesesTotales;
+            let cuotaMensual, cuotaMensualConIVA, totalPagar, interesesTotales;
 
             if (tna === 0) {
                 // Si la TNA es 0%, no hay intereses
                 cuotaMensual = monto / cuotas;
-                totalPagar = monto + gastosConIVA;
+                cuotaMensualConIVA = cuotaMensual * 1.21; // Agregar IVA del 21%
+                totalPagar = (cuotaMensualConIVA * cuotas) + gastosConIVA;
                 interesesTotales = 0;
             } else {
                 // Calcular la tasa mensual
@@ -120,14 +121,15 @@
 
                 // Calcular la cuota mensual usando la fórmula de amortización francesa
                 cuotaMensual = (monto * tasaMensual) / (1 - Math.pow(1 + tasaMensual, -cuotas));
+                cuotaMensualConIVA = cuotaMensual * 1.21; // Agregar IVA del 21%
 
                 // Calcular el total a pagar y los intereses totales
-                totalPagar = (cuotaMensual * cuotas) + gastosConIVA;
+                totalPagar = (cuotaMensualConIVA * cuotas) + gastosConIVA;
                 interesesTotales = totalPagar - monto - gastosConIVA;
             }
 
             // Mostrar resultados
-            cuotaMensualSpan.textContent = cuotaMensual.toFixed(2);
+            cuotaMensualSpan.textContent = cuotaMensualConIVA.toFixed(2);
             totalPagarSpan.textContent = totalPagar.toFixed(2);
             interesesTotalesSpan.textContent = interesesTotales.toFixed(2);
             gastosOtorgamientoSpan.textContent = gastosConIVA.toFixed(2);
