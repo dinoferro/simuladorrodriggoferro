@@ -82,6 +82,7 @@
             <p><strong>Cuota Mensual:</strong> $<span id="cuotaMensual">0</span></p>
             <p><strong>Total a Pagar:</strong> $<span id="totalPagar">0</span></p>
             <p><strong>Intereses Totales:</strong> $<span id="interesesTotales">0</span></p>
+            <p><strong>Gastos de Otorgamiento (con IVA):</strong> $<span id="gastosOtorgamiento">0</span></p>
         </div>
     </section>
 
@@ -91,6 +92,7 @@
         const cuotaMensualSpan = document.getElementById('cuotaMensual');
         const totalPagarSpan = document.getElementById('totalPagar');
         const interesesTotalesSpan = document.getElementById('interesesTotales');
+        const gastosOtorgamientoSpan = document.getElementById('gastosOtorgamiento');
 
         simuladorForm.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -128,6 +130,7 @@
             cuotaMensualSpan.textContent = cuotaMensual.toFixed(2);
             totalPagarSpan.textContent = totalPagar.toFixed(2);
             interesesTotalesSpan.textContent = interesesTotales.toFixed(2);
+            gastosOtorgamientoSpan.textContent = gastosConIVA.toFixed(2);
             resultadoDiv.classList.remove('hidden');
         });
     </script>
