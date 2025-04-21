@@ -79,7 +79,7 @@
         </form>
         <div id="resultado" class="result hidden">
             <h3>Resultados del Crédito</h3>
-            <p><strong>Cuota Mensual (con IVA):</strong> $<span id="cuotaMensual">0</span></p>
+            <p><strong>Cuota Mensual:</strong> $<span id="cuotaMensual">0</span></p>
             <p><strong>Total a Pagar:</strong> $<span id="totalPagar">0</span></p>
             <p><strong>Intereses Totales:</strong> $<span id="interesesTotales">0</span></p>
             <p><strong>Gastos de Otorgamiento (con IVA):</strong> $<span id="gastosOtorgamiento">0</span></p>
@@ -110,10 +110,10 @@
             let cuotaMensual, cuotaMensualConIVA, totalPagar, interesesTotales;
 
             if (tna === 0) {
-                // Si la TNA es 0%, no hay intereses
+                // Si la TNA es 0%, no hay intereses y no se aplica IVA a la cuota
                 cuotaMensual = monto / cuotas;
-                cuotaMensualConIVA = cuotaMensual * 1.21; // Agregar IVA del 21%
-                totalPagar = (cuotaMensualConIVA * cuotas) + gastosConIVA;
+                cuotaMensualConIVA = cuotaMensual; // No se aplica IVA
+                totalPagar = (cuotaMensual * cuotas) + gastosConIVA;
                 interesesTotales = 0;
             } else {
                 // Calcular la tasa mensual
